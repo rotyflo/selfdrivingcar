@@ -10,13 +10,13 @@
 
 // TODO: Replace "___", and assign the pin number for each LDR connected to the Arduino
 //  reference 10.2 potentiometer code
-int LDR_Pin[7] = {___,
-                  ___,
-                  ___,
-                  ___,
-                  ___,
-                  ___,
-                  ___}; 
+int LDR_Pin[7] = {A8,
+                  A9,
+                  A10,
+                  A11,
+                  A12,
+                  A13,
+                  A14}; 
 int LDR[7]; // this is an empty array that will hold the readings from our potentiometers
 
 // TODO: Replace "___", and assign the pin number connected to the Arduino.
@@ -44,8 +44,8 @@ float error; // final error
 // ************************************************************************************************* //
 // setup - runs once
 void setup() {
-  Serial.begin(___); // TODO: Replace "___", and input the baud rate for serial communication
-  pinMode(___, ___); // TODO: Replace "___", and set the led_pin to be an output
+  Serial.begin(9600); // TODO: Replace "___", and input the baud rate for serial communication
+  pinMode(led_Pin, OUTPUT); // TODO: Replace "___", and set the led_pin to be an output
   
   Calibrate(); // Calibrate black and white sensing
  
@@ -64,10 +64,10 @@ void loop() {
 // ************************************************************************************************* //
 // function to blink an LED
 void blink() {
-  digitalWrite(___, ___); // TODO: Replace "___", and turn on the LED
+  digitalWrite(led_Pin, HIGH); // TODO: Replace "___", and turn on the LED
   delay(100); // wait for 100 milliseconds
 
-  digitalWrite(___, ___); // TODO: Replace "___", and turn off the LED
+  digitalWrite(led_Pin, LOW); // TODO: Replace "___", and turn off the LED
   delay(100); // wait for 100 milliseconds
 } // end blink()
 
@@ -82,16 +82,16 @@ void Calibrate() {
   // Calibration
 
   // White Calibration
-  for (int calii = ___; calii < ___; calii = ___) { // TODO: Replace "___", and repeat the section of code
+  for (int calii = 0; calii < 4; calii = calii+1) { // TODO: Replace "___", and repeat the section of code
                                                     //  for the number of calibration measurements desired
-    for (int ci = ___; ci < ___; ci = ____) { // TODO: Replace "___", and loop over all of the LDRs
+    for (int ci = 0; ci < 7; ci = ci+1) { // TODO: Replace "___", and loop over all of the LDRs
       LDRf[ci] = LDRf[ci] + (float) analogRead(LDR_Pin[ci]); // keep track of the sum of each LDR's readings
       delay(2); 
     } 
   } 
     
   // Find average of each LDR's read values
-  for (int cm = ___; cm < ___; cm = ___) { // TODO: Replace "___", and loop over all of the LDRs
+  for (int cm = 0; cm < 7; cm = cm+1) { // TODO: Replace "___", and loop over all of the LDRs
     Mn[cm] = round(LDRf[cm] / (float)numMeas); // take average of each LDR's readings
     LDRf[cm] = 0.; // reset the array holding the sum of the LDR's readings
   }
@@ -102,16 +102,16 @@ void Calibrate() {
   }
  
   // Black Calibration
-  for (int calii = ___; calii < ___; calii = ___) { // TODO: Replace "___", and repeat the section of code
+  for (int calii = 0; calii < 4; calii = calii+1) { // TODO: Replace "___", and repeat the section of code
                                                     //  for the number of calibration measurements desired
-    for (int ci = ___; ci < ___; ci = ____) { // TODO: Replace "___", and loop over all of the LDRs
+    for (int ci = 0; ci < 7; ci = ci+1) { // TODO: Replace "___", and loop over all of the LDRs
       LDRf[ci] = LDRf[ci] + (float) analogRead(LDR_Pin[ci]); // keep track of the sum of each LDR's readings
       delay(2); 
     } 
   }  
   
   // Find average of each LDR's read values
-  for (int cm = ___; cm < ___; cm = ___) { // TODO: Replace "___", and loop over all of the LDRs
+  for (int cm = 0; cm < 7; cm = cm+1) { // TODO: Replace "___", and loop over all of the LDRs
     Mx[cm] = round(LDRf[cm] / (float)numMeas); // take average of each LDR's readings
     LDRf[cm] = 0.; // reset the array holding the sum of the LDR's readings
   }
@@ -120,7 +120,7 @@ void Calibrate() {
 // ************************************************************************************************* //
 // function to read photo resistors, map from 0 to 100, and find darkest photo resitor (MxIndex)
 void ReadPhotoResistors() {
-  for (int Li = ___; Li < ___; Li = ___) { // TODO: Replace "___", and loop over all of the LDRs
+  for (int Li = 0; Li < 7; Li = Li+1) { // TODO: Replace "___", and loop over all of the LDRs
     LDR[Li] = map(analogRead(LDR_Pin[Li]), Mn[Li], Mx[Li], 0, 100);
     delay(2); 
   }
